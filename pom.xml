@@ -30,6 +30,17 @@
         <developerConnection>scm:git:git@github.com:fbiville/maven-embedded-neo4j-archetype.git</developerConnection>
     </scm>
 
+    <developers>
+        <developer>
+            <id>fbiville</id>
+            <name>Florent Biville</name>
+            <email>florent.biville@gmail.com</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <build>
         <extensions>
             <extension>
