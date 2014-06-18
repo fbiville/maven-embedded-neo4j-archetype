@@ -10,7 +10,7 @@
 
     <groupId>net.biville.florent</groupId>
     <artifactId>maven-embedded-neo4j-archetype</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>maven-archetype</packaging>
 
     <name>maven-embedded-neo4j-archetype-archetype</name>
