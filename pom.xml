@@ -23,6 +23,13 @@
         </license>
     </licenses>
 
+
+    <scm>
+        <url>https://github.com/fbiville/maven-embedded-neo4j-archetype</url>
+        <connection>scm:git:git@github.com:fbiville/maven-embedded-neo4j-archetype.git</connection>
+        <developerConnection>scm:git:git@github.com:fbiville/maven-embedded-neo4j-archetype.git</developerConnection>
+    </scm>
+
     <build>
         <extensions>
             <extension>
