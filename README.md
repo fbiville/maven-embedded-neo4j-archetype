@@ -5,7 +5,9 @@ for your Java projects.
 
 ## From Maven Central
 
-TODO
+```
+ $ mvn archetype:generate -Dfilter=maven-embedded-neo4j-archetype
+```
 
 ## From the sources
 
