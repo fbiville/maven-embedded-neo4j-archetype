@@ -22,6 +22,6 @@ for your Java projects.
 [INFO] Generating project in Interactive mode
 [INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
 Choose archetype:
-1: local -> net.biville.florent:maven-embedded-neo4j-archetype-archetype (maven-embedded-neo4j-archetype-archetype)
+1: local -> net.biville.florent:maven-embedded-neo4j-archetype (maven-embedded-neo4j-archetype)
 [INFO] (...) type 1 and go on (...)
 ```
