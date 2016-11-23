@@ -3,32 +3,34 @@
 #set( $symbol_escape = '\' )
 package ${package};
 
-import org.neo4j.cypher.javacompat.ExecutionEngine;
-import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
+import java.io.File;
 import java.io.IOException;
 
 import static java.nio.file.Files.createTempDirectory;
-import static org.neo4j.graphdb.DynamicRelationshipType.withName;
+import static org.neo4j.graphdb.RelationshipType.withName;
 import static org.neo4j.graphdb.PathExpanders.forTypeAndDirection;
 import static org.neo4j.graphdb.traversal.Evaluators.toDepth;
 
 public class Neo4jEmbeddedExample {
 
     private final GraphDatabaseService graphDatabaseService;
-    private final ExecutionEngine executionEngine;
 
     public Neo4jEmbeddedExample(GraphDatabaseService graphDatabaseService) {
         this.graphDatabaseService = graphDatabaseService;
-        executionEngine = new ExecutionEngine(graphDatabaseService);
         dumpData();
     }
 
     public String helloWorldTraversal() {
         StringBuilder values = new StringBuilder();
         try (Transaction tx = graphDatabaseService.beginTx()) {
-            ResourceIterable<Node> startNode = graphDatabaseService.findNodesByLabelAndProperty(DynamicLabel.label("Word"), "value", "Hello");
+            Node startNode = graphDatabaseService.findNode(Label.label("Word"), "value", "Hello");
             for (Node node : graphDatabaseService.traversalDescription()
                     .depthFirst()
                     .expand(forTypeAndDirection(withName("IS_FOLLOWED_BY"), Direction.OUTGOING))
@@ -47,15 +49,15 @@ public class Neo4jEmbeddedExample {
     private final void dumpData() {
         try (Transaction tx = graphDatabaseService.beginTx()) {
             String cql = "CREATE (word:Word {value:'Hello'})-[:IS_FOLLOWED_BY]->(word2:Word {value:'world'})";
-            executionEngine.execute(cql);
+            graphDatabaseService.execute(cql);
             tx.success();
         }
     }
 
     public static void main(String[] args) throws IOException {
-        String neo4jPath = createTempDirectory("neo").toFile().getPath();
+        File neo4jPath = createTempDirectory("neo").toFile();
 
-        System.out.printf("--- Starting embedded neo4j in %s%n", neo4jPath);
+        System.out.printf("--- Starting embedded neo4j in %s%n", neo4jPath.getPath());
 
         GraphDatabaseService graphDB = new GraphDatabaseFactory()
                 .newEmbeddedDatabaseBuilder(neo4jPath)

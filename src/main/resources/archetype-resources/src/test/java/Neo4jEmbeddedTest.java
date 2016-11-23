@@ -6,6 +6,7 @@ package ${package};
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.neo4j.test.DatabaseRule;
 import org.neo4j.test.EmbeddedDatabaseRule;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Neo4jEmbeddedTest {
 
     @Rule
-    public EmbeddedDatabaseRule embeddedDatabaseRule = new EmbeddedDatabaseRule();
+    public DatabaseRule embeddedDatabaseRule = new EmbeddedDatabaseRule();
 
     private Neo4jEmbeddedExample neo4jEmbeddedExample;
 
     @Before
     public void retrieves_service() {
-        neo4jEmbeddedExample = new Neo4jEmbeddedExample(embeddedDatabaseRule.getGraphDatabaseService());
+        neo4jEmbeddedExample = new Neo4jEmbeddedExample(embeddedDatabaseRule);
     }
 
     @Test
